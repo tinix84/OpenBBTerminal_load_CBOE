@@ -22,7 +22,7 @@
         "set": [],
         "scr": ["Syncretism"]
       },
-      "load": ["YahooFinance", "Tradier", "Nasdaq"],
+      "load": ["YahooFinance", "Tradier", "Nasdaq", "Cboe"],
       "exp": ["YahooFinance", "Tradier", "Nasdaq"],
       "pcr": ["AlphaQuery"],
       "info": ["Barchart"],

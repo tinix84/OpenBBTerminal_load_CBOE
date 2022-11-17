@@ -28,6 +28,8 @@ from openbb_terminal.stocks.options import (
     barchart_view,
     calculator_view,
     chartexchange_view,
+    cboe_view,
+    cboe_model,
     fdscanner_view,
     nasdaq_model,
     nasdaq_view,
@@ -693,6 +695,8 @@ class OptionsController(BaseController):
                 self.expiry_dates = yfinance_model.option_expirations(self.ticker)
             elif ns_parser.source == "Nasdaq":
                 self.expiry_dates = nasdaq_model.get_expirations(self.ticker)
+            elif ns_parser.source == "Cboe":
+                self.expiry_dates = cboe_model.get_expirations(self.ticker)
             else:
                 self.expiry_dates = tradier_model.option_expirations(self.ticker)
             console.print("")
@@ -770,6 +774,11 @@ class OptionsController(BaseController):
                         )
                         self.chain = op_helpers.Chain(df)
                     elif self.source == "Nasdaq":
+                        df = nasdaq_model.get_chain_given_expiration(
+                            self.ticker, self.selected_date
+                        )
+                        self.chain = op_helpers.Chain(df, self.source)
+                    elif self.source == "Cboe":
                         df = nasdaq_model.get_chain_given_expiration(
                             self.ticker, self.selected_date
                         )
